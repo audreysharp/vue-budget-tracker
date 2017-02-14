@@ -1,14 +1,16 @@
 <template>
-  <article class="message">
-    <div class="message-header">
-      <p>Hello World</p>
-      <button class="button">Edit</button>
-      <button class="delete"></button>
-    </div>
-    <div class="message-body">
-      Transaction: {{ amount }}
-    </div>
-  </article>
+  <div>
+    <article class="message">
+      <div class="message-header">
+        <p>{{ title }}</p>
+        <button class="delete"></button>
+      </div>
+      <div class="message-body">
+        <b>Amount</b>: {{ amount }}
+        <br> {{ note }}
+      </div>
+    </article>
+  </div>
 </template>
 <script>
   export default {
@@ -22,18 +24,21 @@
       // this.$evt.$off('clear', this.clear)
     },
 
+    props: [
+      'transaction'
+    ],
+
     data() {
       return {
-        name: '',
-        text: '',
-        amount: '$0'
+        title: this.transaction.title,
+        amount: this.transaction.amount,
+        note: this.transaction.note
       }
     },
 
     methods: {
       delete() {
         console.log('Transaction -> delete.')
-
       },
       edit() {
 
@@ -44,6 +49,16 @@
 
 </script>
 <style>
-  .Transaction {}
+  .message {
+    margin: 10px;
+  }
+  
+  .delete {
+    visibility: hidden;
+  }
+  
+  .message:hover .delete {
+    visibility: visible;
+  }
 
 </style>

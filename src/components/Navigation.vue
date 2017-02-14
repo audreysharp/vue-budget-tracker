@@ -37,8 +37,6 @@
 
 </script>
 <style>
-  .nav-left {
-    border-color: purple;
-  }
+
 
 </style>
