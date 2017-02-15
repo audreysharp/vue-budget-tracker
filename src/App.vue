@@ -3,18 +3,19 @@
     <!--<router-view></router-view>-->
     <Navigation>
       <Tab name="Dashboard" :selected="true">
-        <h1>Test1.</h1>
-        <!--<BudgetProgress class="budgetProgress" v-for="(title, max, progress) in budgets "></BudgetProgress>-->
+        <BudgetProgress class="budgetProgress" v-for="budget in budgets" :budget="budget"></BudgetProgress>
       </Tab>
       <Tab name="Transactions">
         <Search v-model="keyword "></Search>
-        <AddTransaction></AddTransaction>
+        <TransactionForm></TransactionForm>
         <br>
-        <Transaction class="transactionsClass" v-for="transaction in filteredList" :transaction="transaction"></Transaction>
-        <!--<Transaction class="transactionsClass" v-for="transaction in transactions" :transaction="transaction"></Transaction>-->
+        <!--<Transaction class="transactionsClass" v-for="transaction in filteredList" :transaction="transaction"></Transaction>-->
+        <Transaction class="transactionsClass" v-for="transaction in transactions" :transaction="transaction"></Transaction>
       </Tab>
-      <Tab name="Budgets ">
-        <h1>Test3.</h1>
+      <Tab name="Budgets">
+        <BudgetForm></BudgetForm>
+        <br>
+        <Budget class="budgetsClass" v-for="budget in budgets" :budget="budget"></Budget>
       </Tab>
     </Navigation>
   </div>
@@ -24,19 +25,25 @@
   import Navigation from './components/Navigation'
   import Tab from './components/Tab'
   import Search from './components/Search'
+  import Budget from './components/Budget'
   import BudgetProgress from './components/BudgetProgress'
-  import AddTransaction from './components/AddTransaction'
+  import BudgetForm from './components/BudgetForm'
+  import TransactionForm from './components/TransactionForm'
 
   export default {
     name: 'app',
 
     mounted() {
       console.log('App -> mounted.')
-      this.$evt.$on('add', this.transactionAdded)
+      this.$evt.$on('addTransaction', this.transactionAdded)
+      this.$evt.$on('deleteTransaction', this.transactionDeleted)
+      this.$evt.$on('addBudget', this.budgetAdded)
     },
 
     beforeDestroy() {
-      this.$evt.$off('add', this.transactionAdded)
+      this.$evt.$off('addTransaction', this.transactionAdded)
+      this.$evt.$off('deleteTransaction', this.transactionDeleted)
+      this.$evt.$off('addBudget', this.budgetAdded)
     },
 
     components: {
@@ -44,8 +51,10 @@
       Navigation,
       Tab,
       Search,
+      Budget,
       BudgetProgress,
-      AddTransaction
+      BudgetForm,
+      TransactionForm
     },
     data() {
       return {
@@ -56,12 +65,32 @@
             note: 'Food'
           },
           {
-            title: 'Untitled2',
+            title: 'Test',
             amount: '$10',
             note: 'Notebook'
+          },
+          {
+            title: 'Test2',
+            amount: '$500',
+            note: 'iPad'
+          },
+          {
+            title: 'iPad',
+            amount: '$10000',
+            note: 'For birthday'
           }
         ],
-        budgets: []
+        budgets: [{
+            title: 'Food',
+            max: '50',
+            progress: '10'
+          },
+          {
+            title: 'Clothes',
+            max: '100',
+            progress: '10'
+          }
+        ]
       }
     },
     methods: {
@@ -72,7 +101,31 @@
           amount: data.amount,
           note: data.note
         })
-      }
+      },
+      transactionDeleted(data) {
+        console.log('App -> transactionDeleted', data)
+        console.log(this.transactions)
+        var title = data.title
+        console.log(title)
+        var index = -1;
+        for (var i = 0, len = this.transactions.length; i < len; i++) {
+          if (this.transactions[i].title === title) {
+            index = i;
+            break;
+          }
+        }
+        console.log(index)
+        if (index > -1) {
+          this.transactions.splice(index, 1)
+        }
+      },
+      budgetAdded(data) {
+        console.log('App -> budgetAdded', data)
+        this.transactions.push({
+          title: data.title,
+          amount: data.amount,
+        })
+      },
     },
     computed: {
       filteredList() {
@@ -91,6 +144,10 @@
   
   [v-cloak] {
     display: none;
+  }
+  
+  .message {
+    margin: 10px;
   }
 
 </style>

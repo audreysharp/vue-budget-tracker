@@ -1,30 +1,27 @@
 <template>
-  <div class="progress">
-    <progress class="progress is-large" value=10 max="100">
-      <p>Hello</p>
-    </progress>
+  <div class="message is-grouped">
+    <div class="message-header">
+      <p>{{ title }}</p>
+      <p>Progress: ${{ progress }} / ${{ max }}</p>
+    </div>
+    <div class="message-body">
+      <div class="progress">
+        <progress class="progress is-large" :value=progress :max=max>
+        </progress>
+      </div>
+    </div>
   </div>
 </template>
 <script>
   export default {
-    props: {
-      title: {
-        default: 'Unnamed'
-      },
-      max: {
-        required: true,
-        default: '$50'
-      },
-      progress: {
-        required: false,
-        default: '$0'
-      }
-    },
+    props: [
+      'budget'
+    ],
     data() {
       return {
-        name: '',
-        max: '',
-        progress: ''
+        title: this.budget.title,
+        max: this.budget.max,
+        progress: this.budget.progress
       }
     }
 

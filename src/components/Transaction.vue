@@ -3,7 +3,7 @@
     <article class="message">
       <div class="message-header">
         <p>{{ title }}</p>
-        <button class="delete"></button>
+        <button class="delete" @click="deleteTransaction" transition="fade"></button>
       </div>
       <div class="message-body">
         <b>Amount</b>: {{ amount }}
@@ -37,8 +37,13 @@
     },
 
     methods: {
-      delete() {
+      deleteTransaction() {
         console.log('Transaction -> delete.')
+        this.$evt.$emit('deleteTransaction', {
+          title: this.title,
+          amount: this.amount,
+          note: this.note
+        })
       },
       edit() {
 
@@ -49,16 +54,22 @@
 
 </script>
 <style>
-  .message {
-    margin: 10px;
-  }
-  
   .delete {
     visibility: hidden;
   }
   
   .message:hover .delete {
     visibility: visible;
+  }
+  
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity .5s;
+  }
+  
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
   }
 
 </style>

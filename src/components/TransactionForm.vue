@@ -9,7 +9,7 @@
         </div>
         <div class="control is-grouped ">
           <input type="text" class="input" placeholder="Transaction Note" v-model="note" />&nbsp;&nbsp;
-          <a class="button is-primary" @click="add">Add</a>
+          <a class="button is-primary" @click="addTransaction">Add</a>
         </div>
       </div>
     </section>
@@ -27,9 +27,9 @@
     },
 
     methods: {
-      add() {
-        console.log('Transaction -> add');
-        this.$evt.$emit('add', {
+      addTransaction() {
+        console.log('Transaction -> addTransaction');
+        this.$evt.$emit('addTransaction', {
           title: this.title,
           amount: this.amount,
           note: this.note
