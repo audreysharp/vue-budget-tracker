@@ -21,14 +21,14 @@
   </div>
 </template>
 <script>
-  import Transaction from './components/Transaction'
   import Navigation from './components/Navigation'
   import Tab from './components/Tab'
   import Search from './components/Search'
+  import Transaction from './components/Transaction'
+  import TransactionForm from './components/TransactionForm'
   import Budget from './components/Budget'
   import BudgetProgress from './components/BudgetProgress'
   import BudgetForm from './components/BudgetForm'
-  import TransactionForm from './components/TransactionForm'
 
   export default {
     name: 'app',
@@ -38,6 +38,7 @@
       this.$evt.$on('addTransaction', this.transactionAdded)
       this.$evt.$on('deleteTransaction', this.transactionDeleted)
       this.$evt.$on('addBudget', this.budgetAdded)
+      this.$evt.$on('deleteBudget', this.budgetDeleted)
       this.$evt.$on('filterTransactions', this.updateKeyword)
     },
 
@@ -45,26 +46,28 @@
       this.$evt.$off('addTransaction', this.transactionAdded)
       this.$evt.$off('deleteTransaction', this.transactionDeleted)
       this.$evt.$off('addBudget', this.budgetAdded)
+      this.$evt.$off('deleteBudget', this.budgetDeleted)
       this.$evt.$off('filterTransactions', this.filterTransactions)
     },
 
     components: {
-      Transaction,
       Navigation,
       Tab,
       Search,
+      Transaction,
+      TransactionForm,
       Budget,
       BudgetProgress,
-      BudgetForm,
-      TransactionForm
+      BudgetForm
     },
     data() {
       return {
-        keyword: '',
+        searchKeyword: '',
         transactions: [{
             title: 'Untitled',
             amount: '$5',
-            note: 'Food'
+            note: 'Food',
+            budget: 'Food'
           },
           {
             title: 'Test',
@@ -84,13 +87,15 @@
         ],
         budgets: [{
             title: 'Food',
-            max: '50',
-            progress: '10'
+            max: 500,
+            progress: 10,
+            items: []
           },
           {
             title: 'Clothes',
-            max: '100',
-            progress: '10'
+            max: 100,
+            progress: 10,
+            items: []
           }
         ]
       }
@@ -101,8 +106,11 @@
         this.transactions.push({
           title: data.title,
           amount: data.amount,
-          note: data.note
+          note: data.note,
+          budget: data.budget
         })
+        console.log(this.transactions[4])
+        this.addToBudget(this.transactions[this.transactions.length - 1]) // since using push(), item will always be added to end of array
       },
       transactionDeleted(data) {
         console.log('App -> transactionDeleted', data)
@@ -110,19 +118,36 @@
       },
       budgetAdded(data) {
         console.log('App -> budgetAdded', data)
-        this.transactions.push({
+        this.budgets.push({
           title: data.title,
-          amount: data.amount,
+          max: data.max,
+          progress: 0
         })
       },
+      budgetDeleted(data) {
+        console.log('App -> budgetDeleted', data)
+        this.budgets.splice(this.budgets.indexOf(data), 1)
+      },
       updateKeyword(data) {
-        this.keyword = data
+        this.searchKeyword = data
+      },
+
+      addToBudget(transaction) {
+        var index = 0
+        for (var i = 0; i < this.budgets.length; i++) {
+          if (this.budgets.title === transaction.budget) {
+            index = i
+            break
+          }
+        }
+        this.budgets[index].progress += parseInt(transaction.amount.substring(1))
+        this.budgets[index].items.push(transaction)
       }
     },
     computed: {
       filteredList() {
         return this.transactions.filter((transaction) => {
-          return transaction.title.toLowerCase().includes(this.keyword)
+          return transaction.title.toLowerCase().includes(this.searchKeyword)
         })
       }
     }

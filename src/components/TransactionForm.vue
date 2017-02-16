@@ -5,10 +5,11 @@
       <div class="control">
         <div class="control is-grouped">
           <input type="text" class="input" placeholder="Transaction Title" v-model="title" /> &nbsp;&nbsp;
-          <input type="text" class="input" placeholder="Transaction Amount" v-model="amount" onfocus="this.value='$'" />&nbsp;&nbsp;
+          <input type="text" class="input amount" placeholder="Transaction Amount" v-model="amount" onfocus="this.value='$'" @keyup="validateNumber"
+          /> &nbsp;&nbsp;
           <span class="select">
             <select v-model="selectedBudget">
-              <option hidden disabled value="">Choose budget...</option>
+              <!--<option disabled value="">Choose budget...</option>-->
               <option v-for="budget in budgets" :value=budget.title>{{ budget.title }}</option>
             </select>
         </span>
@@ -33,12 +34,22 @@
         title: '',
         amount: '',
         note: '',
-        selectedBudget: ''
+        selectedBudget: this.budgets[0].title
       }
     },
 
     methods: {
+      validateNumber() { // ensure that user has entered a number into textbok
+        if (isNaN(parseInt(this.amount.substring(1)))) {
+          document.getElementsByClassName("amount")[0].classList.add('is-danger')
+        } else {
+          document.getElementsByClassName("amount")[0].classList.remove('is-danger')
+        }
+      },
       addTransaction() {
+        if (isNaN(parseInt(this.amount.substring(1))) || this.selectedBudget === '') {
+          return
+        }
         console.log('Transaction -> addTransaction');
         this.$evt.$emit('addTransaction', {
           title: this.title,
@@ -52,7 +63,7 @@
         this.title = ''
         this.amount = ''
         this.note = ''
-        this.selectedBudget = ''
+        this.selectedBudget = this.budgets[0].title
       }
     }
   }

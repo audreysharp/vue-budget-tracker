@@ -3,11 +3,14 @@
     <article class="message">
       <div class="message-header">
         <p>{{ budget.title }}</p>
-        <button class="delete" @click="deleteTransaction" transition="fade"></button>
+        <button class="delete" @click="deleteBudget" transition="fade"></button>
       </div>
       <div class="message-body">
-        <b>Amount</b>: {{ budget.amount }}
-        <br> {{ budget.note }}
+        <b>Amount</b>: ${{ budget.max }}
+        <br>
+        <li class="items" v-for="item in budget.items">
+          {{ item }}
+        </li>
       </div>
     </article>
   </div>
@@ -16,12 +19,10 @@
   export default {
     mounted() {
       console.log('Budget -> mounted.')
-      // this.$evt.$on('clear', this.clear)
     },
 
     beforeDestroy() {
       console.log('Budget -> beforeDestroy.')
-      // this.$evt.$off('clear', this.clear)
     },
 
     props: [
@@ -29,19 +30,16 @@
     ],
 
     methods: {
-      deleteTransaction() {
+      deleteBudget() {
         console.log('Budget -> delete.')
-        this.$evt.$emit('deleteTransaction', this.budget)
-      },
-      edit() {
-
+        this.$evt.$emit('deleteBudget', this.budget)
       }
     }
 
   }
 
 </script>
-<style>
+<style scoped>
   .delete {
     visibility: hidden;
   }
@@ -58,6 +56,10 @@
   .fade-enter,
   .fade-leave-to {
     opacity: 0;
+  }
+  
+  .items {
+    padding-left: 20px;
   }
 
 </style>

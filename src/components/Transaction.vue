@@ -6,8 +6,8 @@
         <button class="delete" @click="deleteTransaction" transition="fade"></button>
       </div>
       <div class="message-body">
-        <b>Amount</b>: {{ transaction.amount }}
-        <br> {{ transaction.note }}
+        <b>Budget</b>: {{ transaction.budget }} <br>
+        <b>Amount</b>: {{ transaction.amount }} <br> {{ transaction.note }}
       </div>
     </article>
   </div>
@@ -16,12 +16,10 @@
   export default {
     mounted() {
       console.log('Transaction -> mounted.')
-      // this.$evt.$on('clear', this.clear)
     },
 
     beforeDestroy() {
       console.log('Transaction -> beforeDestroy.')
-      // this.$evt.$off('clear', this.clear)
     },
 
     props: [
@@ -32,9 +30,6 @@
       deleteTransaction() {
         console.log('Transaction -> delete.')
         this.$evt.$emit('deleteTransaction', this.transaction)
-      },
-      edit() {
-
       }
     }
 
