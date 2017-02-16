@@ -53,7 +53,7 @@
         console.log('Transaction -> addTransaction');
         this.$evt.$emit('addTransaction', {
           title: this.title,
-          amount: this.amount,
+          amount: parseInt(this.amount.substring(1)),
           note: this.note,
           budget: this.selectedBudget
         })

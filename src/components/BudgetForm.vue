@@ -27,7 +27,6 @@
         if (isNaN(parseInt(this.amount.substring(1)))) {
           document.getElementsByClassName("amount")[0].classList.add('is-danger')
         } else {
-          console.log(document.getElementsByClassName("amount")[0].className)
           document.getElementsByClassName("amount")[0].classList.remove('is-danger')
         }
       },

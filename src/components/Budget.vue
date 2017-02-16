@@ -6,10 +6,10 @@
         <button class="delete" @click="deleteBudget" transition="fade"></button>
       </div>
       <div class="message-body">
-        <b>Amount</b>: ${{ budget.max }}
+        <b>Max Goal</b>: ${{ budget.max }}
         <br>
         <li class="items" v-for="item in budget.items">
-          {{ item }}
+          {{ item.title }} - ${{ item.amount }}
         </li>
       </div>
     </article>

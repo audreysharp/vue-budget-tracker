@@ -7,7 +7,7 @@
       </div>
       <div class="message-body">
         <b>Budget</b>: {{ transaction.budget }} <br>
-        <b>Amount</b>: {{ transaction.amount }} <br> {{ transaction.note }}
+        <b>Amount</b>: ${{ transaction.amount }} <br> {{ transaction.note }}
       </div>
     </article>
   </div>

@@ -63,38 +63,36 @@
     data() {
       return {
         searchKeyword: '',
-        transactions: [{
-            title: 'Untitled',
-            amount: '$5',
-            note: 'Food',
-            budget: 'Food'
-          },
-          {
-            title: 'Test',
-            amount: '$10',
-            note: 'Notebook'
-          },
-          {
-            title: 'Test2',
-            amount: '$500',
-            note: 'iPad'
-          },
-          {
-            title: 'iPad',
-            amount: '$10000',
-            note: 'For birthday'
-          }
+        transactions: [
+          /*{
+                      title: 'Chips',
+                      amount: 2,
+                      note: 'For lunch, from Subway',
+                      budget: 'Food'
+                    },
+                    {
+                      title: 'Dress',
+                      amount: 10,
+                      note: 'Dress from Forever 21',
+                      budget: 'Clothes'
+                    },
+                    {
+                      title: 'Water bottle',
+                      amount: 6,
+                      note: 'From CVS',
+                      budget: 'Food'
+                    },*/
         ],
         budgets: [{
             title: 'Food',
             max: 500,
-            progress: 10,
+            progress: 0,
             items: []
           },
           {
             title: 'Clothes',
             max: 100,
-            progress: 10,
+            progress: 0,
             items: []
           }
         ]
@@ -109,19 +107,27 @@
           note: data.note,
           budget: data.budget
         })
-        console.log(this.transactions[4])
         this.addToBudget(this.transactions[this.transactions.length - 1]) // since using push(), item will always be added to end of array
       },
       transactionDeleted(data) {
         console.log('App -> transactionDeleted', data)
         this.transactions.splice(this.transactions.indexOf(data), 1)
+        var budgetsIndex = 0
+        // traverse through budgets array and remove the corresponding transaction
+        for (var i = 0; i < this.budgets.length; i++) {
+          if (this.budgets[i].title === data.budget) {
+            this.budgets[i].items.splice(this.budgets[i].items.indexOf(data), 1)
+            this.budgets[i].progress -= data.amount
+          }
+        }
       },
       budgetAdded(data) {
         console.log('App -> budgetAdded', data)
         this.budgets.push({
           title: data.title,
           max: data.max,
-          progress: 0
+          progress: 0,
+          items: []
         })
       },
       budgetDeleted(data) {
@@ -140,7 +146,7 @@
             break
           }
         }
-        this.budgets[index].progress += parseInt(transaction.amount.substring(1))
+        this.budgets[index].progress += transaction.amount
         this.budgets[index].items.push(transaction)
       }
     },
@@ -156,7 +162,8 @@
 </script>
 <style>
   #app {
-    padding: 25px;
+    padding: 50px;
+    padding-top: 20px;
   }
   
   [v-cloak] {
