@@ -24,14 +24,14 @@
 
     methods: {
       validateNumber() {
-        if (isNaN(parseInt(this.amount.substring(1)))) {
+        if (isNaN(parseInt(this.max.substring(1)))) {
           document.getElementsByClassName("amount")[0].classList.add('is-danger')
         } else {
           document.getElementsByClassName("amount")[0].classList.remove('is-danger')
         }
       },
       addBudget() {
-        if (isNaN(parseInt(this.amount.substring(1)))) {
+        if (isNaN(parseInt(this.max.substring(1)))) {
           return
         }
         console.log('Budget -> addBudget');

@@ -43,6 +43,7 @@
     },
 
     beforeDestroy() {
+      console.log('App -> beforeDestroy.')
       this.$evt.$off('addTransaction', this.transactionAdded)
       this.$evt.$off('deleteTransaction', this.transactionDeleted)
       this.$evt.$off('addBudget', this.budgetAdded)
@@ -63,26 +64,7 @@
     data() {
       return {
         searchKeyword: '',
-        transactions: [
-          /*{
-                      title: 'Chips',
-                      amount: 2,
-                      note: 'For lunch, from Subway',
-                      budget: 'Food'
-                    },
-                    {
-                      title: 'Dress',
-                      amount: 10,
-                      note: 'Dress from Forever 21',
-                      budget: 'Clothes'
-                    },
-                    {
-                      title: 'Water bottle',
-                      amount: 6,
-                      note: 'From CVS',
-                      budget: 'Food'
-                    },*/
-        ],
+        transactions: [],
         budgets: [{
             title: 'Food',
             max: 500,
@@ -137,21 +119,20 @@
       updateKeyword(data) {
         this.searchKeyword = data
       },
-
-      addToBudget(transaction) {
+      addToBudget(transaction) { // find correct budget to add transaction to
         var index = 0
         for (var i = 0; i < this.budgets.length; i++) {
-          if (this.budgets.title === transaction.budget) {
+          if (this.budgets[i].title === transaction.budget) {
             index = i
             break
           }
         }
-        this.budgets[index].progress += transaction.amount
-        this.budgets[index].items.push(transaction)
+        this.budgets[index].progress += transaction.amount // add amount of transaction to budget progress
+        this.budgets[index].items.push(transaction) // add transaction to appropriate budget to display in 'budgets' tab
       }
     },
     computed: {
-      filteredList() {
+      filteredList() { // filter transactions list
         return this.transactions.filter((transaction) => {
           return transaction.title.toLowerCase().includes(this.searchKeyword)
         })

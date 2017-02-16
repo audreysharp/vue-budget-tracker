@@ -36,23 +36,13 @@
   }
 
 </script>
-<style>
+<style scoped>
   .delete {
     visibility: hidden;
   }
   
   .message:hover .delete {
     visibility: visible;
-  }
-  
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity .5s;
-  }
-  
-  .fade-enter,
-  .fade-leave-to {
-    opacity: 0;
   }
 
 </style>

@@ -9,7 +9,6 @@
           /> &nbsp;&nbsp;
           <span class="select">
             <select v-model="selectedBudget">
-              <!--<option disabled value="">Choose budget...</option>-->
               <option v-for="budget in budgets" :value=budget.title>{{ budget.title }}</option>
             </select>
         </span>
@@ -26,7 +25,7 @@
   export default {
 
     props: [
-      'budgets' // budgets array from parent, for budgets dropdown
+      'budgets' // budgets array from parent App.vue, to populate budgets dropdown
     ],
 
     data() {

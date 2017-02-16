@@ -48,16 +48,6 @@
     visibility: visible;
   }
   
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity .5s;
-  }
-  
-  .fade-enter,
-  .fade-leave-to {
-    opacity: 0;
-  }
-  
   .items {
     padding-left: 20px;
   }
