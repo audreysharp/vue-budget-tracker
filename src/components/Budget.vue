@@ -2,12 +2,12 @@
   <div>
     <article class="message">
       <div class="message-header">
-        <p>{{ title }}</p>
+        <p>{{ budget.title }}</p>
         <button class="delete" @click="deleteTransaction" transition="fade"></button>
       </div>
       <div class="message-body">
-        <b>Amount</b>: {{ amount }}
-        <br> {{ note }}
+        <b>Amount</b>: {{ budget.amount }}
+        <br> {{ budget.note }}
       </div>
     </article>
   </div>
@@ -28,22 +28,10 @@
       'budget'
     ],
 
-    data() {
-      return {
-        title: this.budget.title,
-        amount: this.budget.max,
-        note: this.budget.note
-      }
-    },
-
     methods: {
       deleteTransaction() {
-        console.log('Transaction -> delete.')
-        this.$evt.$emit('deleteTransaction', {
-          title: this.title,
-          amount: this.amount,
-          note: this.note
-        })
+        console.log('Budget -> delete.')
+        this.$evt.$emit('deleteTransaction', this.budget)
       },
       edit() {
 

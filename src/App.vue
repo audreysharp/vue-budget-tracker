@@ -104,20 +104,7 @@
       },
       transactionDeleted(data) {
         console.log('App -> transactionDeleted', data)
-        console.log(this.transactions)
-        var title = data.title
-        console.log(title)
-        var index = -1;
-        for (var i = 0, len = this.transactions.length; i < len; i++) {
-          if (this.transactions[i].title === title) {
-            index = i;
-            break;
-          }
-        }
-        console.log(index)
-        if (index > -1) {
-          this.transactions.splice(index, 1)
-        }
+        this.transactions.splice(this.transactions.indexOf(data), 1)
       },
       budgetAdded(data) {
         console.log('App -> budgetAdded', data)
