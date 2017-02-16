@@ -6,11 +6,11 @@
         <BudgetProgress class="budgetProgress" v-for="budget in budgets" :budget="budget"></BudgetProgress>
       </Tab>
       <Tab name="Transactions">
-        <Search v-model="keyword "></Search>
-        <TransactionForm></TransactionForm>
+        <Search v-model="keyword"></Search>
+        <TransactionForm :budgets="budgets"></TransactionForm>
         <br>
-        <!--<Transaction class="transactionsClass" v-for="transaction in filteredList" :transaction="transaction"></Transaction>-->
-        <Transaction class="transactionsClass" v-for="transaction in transactions" :transaction="transaction"></Transaction>
+        <Transaction class="transactionsClass" v-for="transaction in filteredList" :transaction="transaction"></Transaction>
+        <!--<Transaction class="transactionsClass" v-for="transaction in transactions" :transaction="transaction"></Transaction>-->
       </Tab>
       <Tab name="Budgets">
         <BudgetForm></BudgetForm>
@@ -129,8 +129,8 @@
     },
     computed: {
       filteredList() {
-        return this.transactions.filter((transactions) => {
-          return transactions.title.toLowerCase().includes(this.keyword)
+        return this.transactions.filter((transaction) => {
+          return transaction.title.toLowerCase().includes(this.keyword)
         })
       }
     }

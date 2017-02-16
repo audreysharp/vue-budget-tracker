@@ -21,7 +21,7 @@
     },
 
     computed: {
-      href() {
+      href() { // add tab name to URL
         return '#' + this.name.toLowerCase().replace(/ /g, '-'); // replace spaces with dashes
       }
     },

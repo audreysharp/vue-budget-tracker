@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+// event bus
 const evt = new Vue()
 Vue.prototype.$evt = evt
 
