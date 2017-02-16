@@ -1,12 +1,12 @@
 <template>
   <div class="message is-grouped">
     <div class="message-header">
-      <p>{{ title }}</p>
-      <p>Progress: ${{ progress }} / ${{ max }}</p>
+      <p>{{ budget.title }}</p>
+      <p>Progress: ${{ budget.progress }} / ${{ budget.max }}</p>
     </div>
     <div class="message-body">
       <div class="progress">
-        <progress class="progress is-large" :value=progress :max=max>
+        <progress class="progress is-large" :value=budget.progress :max=budget.max>
         </progress>
       </div>
     </div>
@@ -16,15 +16,7 @@
   export default {
     props: [
       'budget'
-    ],
-    data() {
-      return {
-        title: this.budget.title,
-        max: this.budget.max,
-        progress: this.budget.progress
-      }
-    }
-
+    ]
   }
 
 </script>

@@ -6,7 +6,7 @@
         <BudgetProgress class="budgetProgress" v-for="budget in budgets" :budget="budget"></BudgetProgress>
       </Tab>
       <Tab name="Transactions">
-        <Search v-model="keyword"></Search>
+        <Search></Search>
         <TransactionForm :budgets="budgets"></TransactionForm>
         <br>
         <Transaction class="transactionsClass" v-for="transaction in filteredList" :transaction="transaction"></Transaction>
@@ -38,12 +38,14 @@
       this.$evt.$on('addTransaction', this.transactionAdded)
       this.$evt.$on('deleteTransaction', this.transactionDeleted)
       this.$evt.$on('addBudget', this.budgetAdded)
+      this.$evt.$on('filterTransactions', this.updateKeyword)
     },
 
     beforeDestroy() {
       this.$evt.$off('addTransaction', this.transactionAdded)
       this.$evt.$off('deleteTransaction', this.transactionDeleted)
       this.$evt.$off('addBudget', this.budgetAdded)
+      this.$evt.$off('filterTransactions', this.filterTransactions)
     },
 
     components: {
@@ -113,6 +115,9 @@
           amount: data.amount,
         })
       },
+      updateKeyword(data) {
+        this.keyword = data
+      }
     },
     computed: {
       filteredList() {
