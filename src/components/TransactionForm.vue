@@ -29,7 +29,7 @@
       'budgets' // budgets array from parent App.vue, to populate budgets dropdown
     ],
 
-    data() {
+    data () {
       return {
         title: '',
         amount: '',
@@ -39,19 +39,19 @@
     },
 
     methods: {
-      validateNumber() { // ensure that user has entered a number into textbok
+      validateNumber () { // ensure that user has entered a number into textbok
         if (isNaN(parseInt(this.amount.substring(1)))) {
-          document.getElementsByClassName("amount")[0].classList.add('is-danger')
+          document.getElementsByClassName('amount')[0].classList.add('is-danger')
         } else {
-          document.getElementsByClassName("amount")[0].classList.remove('is-danger')
+          document.getElementsByClassName('amount')[0].classList.remove('is-danger')
         }
       },
 
-      addTransaction() {
+      addTransaction () {
         if (isNaN(parseInt(this.amount.substring(1))) || this.selectedBudget === '') {
           return
         }
-        console.log('Transaction -> addTransaction');
+        console.log('Transaction -> addTransaction')
         this.$evt.$emit('addTransaction', {
           title: this.title,
           amount: parseInt(this.amount.substring(1)),
@@ -61,7 +61,7 @@
         this.reset()
       },
 
-      reset() {
+      reset () {
         this.title = ''
         this.amount = ''
         this.note = ''

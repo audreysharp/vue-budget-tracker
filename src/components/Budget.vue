@@ -18,11 +18,11 @@
 
 <script>
   export default {
-    mounted() {
+    mounted () {
       console.log('Budget -> mounted.')
     },
 
-    beforeDestroy() {
+    beforeDestroy () {
       console.log('Budget -> beforeDestroy.')
     },
 
@@ -31,7 +31,7 @@
     ],
 
     methods: {
-      deleteBudget() {
+      deleteBudget () {
         console.log('Budget -> delete.')
         this.$evt.$emit('deleteBudget', this.budget)
       }

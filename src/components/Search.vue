@@ -10,14 +10,14 @@
 <script>
   export default {
 
-    data() {
+    data () {
       return {
-        keyword: '',
+        keyword: ''
       }
     },
 
     methods: {
-      filterTransactions() {
+      filterTransactions () {
         this.$evt.$emit('filterTransactions', this.keyword)
       }
     }

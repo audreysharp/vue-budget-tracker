@@ -27,16 +27,16 @@
 </template>
 <script>
   export default {
-    mounted() {
+    mounted () {
       console.log('Modal -> mounted.')
     },
 
-    beforeDestroy() {
+    beforeDestroy () {
       console.log('Modal -> beforeDestroy.')
     },
     methods: {
-      hideModal() {
-        console.log('Modal -> hideModal');
+      hideModal () {
+        console.log('Modal -> hideModal')
         this.$evt.$emit('hideModal')
       }
     }

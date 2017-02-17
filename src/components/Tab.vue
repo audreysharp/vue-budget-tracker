@@ -15,20 +15,20 @@
       }
     },
 
-    data() {
+    data () {
       return {
         isActive: false
       }
     },
 
     computed: {
-      href() { // add tab name to URL
-        return '#' + this.name.toLowerCase().replace(/ /g, '-'); // replace spaces with dashes
+      href () { // add tab name to URL
+        return '#' + this.name.toLowerCase().replace(/ /g, '-') // replace spaces with dashes
       }
     },
 
-    mounted() {
-      this.isActive = this.selected;
+    mounted () {
+      this.isActive = this.selected
     }
   }
 

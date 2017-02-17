@@ -8,6 +8,6 @@ export default new Router({
   routes: [{
     path: '/',
     name: 'Test'
-    //component: Transaction
+    // component: Transaction
   }]
 })

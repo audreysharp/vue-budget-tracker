@@ -15,11 +15,11 @@
 
 <script>
   export default {
-    mounted() {
+    mounted () {
       console.log('Transaction -> mounted.')
     },
 
-    beforeDestroy() {
+    beforeDestroy () {
       console.log('Transaction -> beforeDestroy.')
     },
 
@@ -28,7 +28,7 @@
     ],
 
     methods: {
-      deleteTransaction() {
+      deleteTransaction () {
         console.log('Transaction -> delete.')
         this.$evt.$emit('deleteTransaction', this.transaction)
       }

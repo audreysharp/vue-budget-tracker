@@ -1,7 +1,6 @@
 <template>
   <div id="container">
     <div id="app" v-cloak>
-      <!--<router-view></router-view>-->
       <StartModal v-if="showModal"></StartModal>
       <Navigation>
         <Tab name="Dashboard" :selected="true">
@@ -20,8 +19,9 @@
         </Tab>
       </Navigation>
       <div class="footer"><a class="button show-modal" @click="toggleModal">View Instructions</a>
-        <br>Project made by Audrey Sharp for MEJO 583. Built with <a href="https://vuejs.org/">Vue.js</a> and <a href="http://bulma.io/">Bulma</a>.
-        Source code for project on <a href="https://github.com/audreysharp/vue-budget-tracker">Github</a>. 
+        <br>Built by Audrey Sharp for MEJO 583: Multimedia Programming and Production.<br> 
+        Built with <a href="https://vuejs.org/">Vue.js</a> and <a href="http://bulma.io/">Bulma</a>.
+        Source code for project on <a href="https://github.com/audreysharp/vue-budget-tracker">Github</a>.<br>
       </div>
     </div>
   </div>
@@ -41,7 +41,7 @@ import BudgetForm from './components/BudgetForm'
 export default {
   name: 'app',
 
-  mounted() {
+  mounted () {
     console.log('App -> mounted.')
     this.$evt.$on('addTransaction', this.transactionAdded)
     this.$evt.$on('deleteTransaction', this.transactionDeleted)
@@ -51,7 +51,7 @@ export default {
     this.$evt.$on('hideModal', this.toggleModal)
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     console.log('App -> beforeDestroy.')
     this.$evt.$off('addTransaction', this.transactionAdded)
     this.$evt.$off('deleteTransaction', this.transactionDeleted)
@@ -73,7 +73,7 @@ export default {
     BudgetForm
   },
 
-  data() {
+  data () {
     return {
       showModal: true,
       searchKeyword: '',
@@ -94,7 +94,7 @@ export default {
   },
 
   methods: {
-    transactionAdded(data) {
+    transactionAdded (data) {
       console.log('App -> transactionAdded', data)
       this.transactions.push({
         title: data.title,
@@ -105,10 +105,9 @@ export default {
       this.addToBudget(this.transactions[this.transactions.length - 1]) // since using push(), item will always be added to end of array
     },
 
-    transactionDeleted(data) {
+    transactionDeleted (data) {
       console.log('App -> transactionDeleted', data)
       this.transactions.splice(this.transactions.indexOf(data), 1)
-      var budgetsIndex = 0
       // traverse through budgets array and remove the corresponding transaction
       for (var i = 0; i < this.budgets.length; i++) {
         if (this.budgets[i].title === data.budget) {
@@ -118,7 +117,7 @@ export default {
       }
     },
 
-    budgetAdded(data) {
+    budgetAdded (data) {
       console.log('App -> budgetAdded', data)
       this.budgets.push({
         title: data.title,
@@ -128,16 +127,16 @@ export default {
       })
     },
 
-    budgetDeleted(data) {
+    budgetDeleted (data) {
       console.log('App -> budgetDeleted', data)
       this.budgets.splice(this.budgets.indexOf(data), 1)
     },
 
-    updateKeyword(data) {
+    updateKeyword (data) {
       this.searchKeyword = data
     },
 
-    addToBudget(transaction) { // find correct budget to add transaction to
+    addToBudget (transaction) { // find correct budget to add transaction to
       var index = 0
       for (var i = 0; i < this.budgets.length; i++) {
         if (this.budgets[i].title === transaction.budget) {
@@ -149,13 +148,13 @@ export default {
       this.budgets[index].items.push(transaction) // add transaction to appropriate budget to display in 'budgets' tab
     },
 
-    toggleModal() {
+    toggleModal () {
       this.showModal = !this.showModal
     }
   },
 
   computed: {
-    filteredList() { // filter transactions list
+    filteredList () { // filter transactions list
       return this.transactions.filter((transaction) => {
         return transaction.title.toLowerCase().includes(this.searchKeyword)
       })
@@ -175,7 +174,7 @@ html, body {
 #app {
   padding: 50px;
   padding-top: 20px;
-  padding-bottom: 120px;
+  padding-bottom: 110px;
   margin: 0 auto;
 }
 

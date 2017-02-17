@@ -16,20 +16,20 @@
 <script>
   export default {
 
-    data() {
+    data () {
       return {
         tabs: []
       }
     },
 
-    created() {
+    created () {
       this.tabs = this.$children
     },
 
     methods: {
-      selectTab(selectedTab) {
+      selectTab (selectedTab) {
         this.tabs.forEach(tab => { // avoid mutating a property directly; use data or property
-          tab.isActive = (tab.name == selectedTab.name);
+          tab.isActive = (tab.name === selectedTab.name)
         })
       }
     }

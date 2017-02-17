@@ -20,7 +20,7 @@
     ],
 
     computed: {
-      classObject() { // change color of progress bar based on budget progress
+      classObject () { // change color of progress bar based on budget progress
         if (this.budget.progress < this.budget.max) {
           return {
             'progress': true,

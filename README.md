@@ -2,6 +2,9 @@
 
 > A budget tracker written with Vue.js
 
+Project for MEJO 583: Multimedia Programming and Production
+Financial budget tracker built with Vue.js using the vue-cli webpack template and Bulma.
+
 ## Build Setup
 
 ``` bash
