@@ -11,7 +11,6 @@
         <TransactionForm :budgets="budgets"></TransactionForm>
         <br>
         <Transaction class="transactionsClass" v-for="transaction in filteredList" :transaction="transaction"></Transaction>
-        <!--<Transaction class="transactionsClass" v-for="transaction in transactions" :transaction="transaction"></Transaction>-->
       </Tab>
       <Tab name="Budgets">
         <BudgetForm></BudgetForm>
