@@ -1,26 +1,29 @@
 <template>
-  <div id="app" v-cloak>
-    <!--<router-view></router-view>-->
-    <StartModal v-if="showModal"></StartModal>
-    <Navigation>
-      <Tab name="Dashboard" :selected="true">
-        <BudgetProgress class="budgetProgress" v-for="budget in budgets" :budget="budget"></BudgetProgress>
-      </Tab>
-      <Tab name="Transactions">
-        <Search></Search>
-        <TransactionForm :budgets="budgets"></TransactionForm>
-        <br>
-        <Transaction class="transactionsClass" v-for="transaction in filteredList" :transaction="transaction"></Transaction>
-      </Tab>
-      <Tab name="Budgets">
-        <BudgetForm></BudgetForm>
-        <br>
-        <Budget class="budgetsClass" v-for="budget in budgets" :budget="budget"></Budget>
-      </Tab>
-    </Navigation>
-    <div class="footer"><a class="button show-modal" @click="toggleModal">View Instructions</a>
-      <br>Project made by Audrey Sharp for MEJO 583. Built with <a href="https://vuejs.org/">Vue.js</a> and <a href="http://bulma.io/">Bulma</a>.
-      Source code for project on <a href="https://github.com/audreysharp/vue-budget-tracker">Github</a>. </div>
+  <div id="container">
+    <div id="app" v-cloak>
+      <!--<router-view></router-view>-->
+      <StartModal v-if="showModal"></StartModal>
+      <Navigation>
+        <Tab name="Dashboard" :selected="true">
+          <BudgetProgress class="budgetProgress" v-for="budget in budgets" :budget="budget"></BudgetProgress>
+        </Tab>
+        <Tab name="Transactions">
+          <Search></Search>
+          <TransactionForm :budgets="budgets"></TransactionForm>
+          <br>
+          <Transaction class="transactionsClass" v-for="transaction in filteredList" :transaction="transaction"></Transaction>
+        </Tab>
+        <Tab name="Budgets">
+          <BudgetForm></BudgetForm>
+          <br>
+          <Budget class="budgetsClass" v-for="budget in budgets" :budget="budget"></Budget>
+        </Tab>
+      </Navigation>
+      <div class="footer"><a class="button show-modal" @click="toggleModal">View Instructions</a>
+        <br>Project made by Audrey Sharp for MEJO 583. Built with <a href="https://vuejs.org/">Vue.js</a> and <a href="http://bulma.io/">Bulma</a>.
+        Source code for project on <a href="https://github.com/audreysharp/vue-budget-tracker">Github</a>. 
+      </div>
+    </div>
   </div>
 </template>
 
@@ -162,9 +165,24 @@ export default {
 </script>
 
 <style>
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 #app {
   padding: 50px;
   padding-top: 20px;
+  padding-bottom: 120px;
+  margin: 0 auto;
+}
+
+#container {
+  min-height: 100%;
+  position: relative;
+  margin: 0;
 }
 
 [v-cloak] {
@@ -177,9 +195,10 @@ export default {
 
 .footer {
   position: absolute;
-  right: 0;
   bottom: 0;
+  right: 0;
   left: 0;
+  height: 110px;
   padding: 1rem;
   background-color: #efefef;
   text-align: center;
