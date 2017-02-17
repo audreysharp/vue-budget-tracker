@@ -21,6 +21,7 @@
     </section>
   </div>
 </template>
+
 <script>
   export default {
 
@@ -45,6 +46,7 @@
           document.getElementsByClassName("amount")[0].classList.remove('is-danger')
         }
       },
+
       addTransaction() {
         if (isNaN(parseInt(this.amount.substring(1))) || this.selectedBudget === '') {
           return
@@ -58,6 +60,7 @@
         })
         this.reset()
       },
+
       reset() {
         this.title = ''
         this.amount = ''
@@ -68,7 +71,6 @@
   }
 
 </script>
+
 <style>
-
-
 </style>

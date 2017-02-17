@@ -15,6 +15,7 @@
     </article>
   </div>
 </template>
+
 <script>
   export default {
     mounted() {
@@ -37,8 +38,8 @@
     }
 
   }
-
 </script>
+
 <style scoped>
   .delete {
     visibility: hidden;
@@ -51,5 +52,4 @@
   .items {
     padding-left: 20px;
   }
-
 </style>

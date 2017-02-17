@@ -13,6 +13,7 @@
     </section>
   </div>
 </template>
+
 <script>
   export default {
     data() {
@@ -30,6 +31,7 @@
           document.getElementsByClassName("amount")[0].classList.remove('is-danger')
         }
       },
+
       addBudget() {
         if (isNaN(parseInt(this.max.substring(1)))) {
           return
@@ -41,15 +43,14 @@
         })
         this.reset()
       },
+
       reset() {
         this.title = ''
         this.max = ''
       }
     }
   }
-
 </script>
+
 <style>
-
-
 </style>

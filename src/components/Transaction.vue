@@ -12,6 +12,7 @@
     </article>
   </div>
 </template>
+
 <script>
   export default {
     mounted() {
@@ -36,6 +37,7 @@
   }
 
 </script>
+
 <style scoped>
   .delete {
     visibility: hidden;
@@ -44,5 +46,4 @@
   .message:hover .delete {
     visibility: visible;
   }
-
 </style>
